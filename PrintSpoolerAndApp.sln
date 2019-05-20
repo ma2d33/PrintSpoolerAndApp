@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintSpoolerAndApp", "PrintSpoolerAndApp\PrintSpoolerAndApp.csproj", "{CB57B1B0-51B8-4752-A032-55E068504D44}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrinterLib", "PrinterLib\PrinterLib.csproj", "{16416068-5A10-4C67-8FDC-4CE5459303F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{CB57B1B0-51B8-4752-A032-55E068504D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB57B1B0-51B8-4752-A032-55E068504D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB57B1B0-51B8-4752-A032-55E068504D44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16416068-5A10-4C67-8FDC-4CE5459303F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16416068-5A10-4C67-8FDC-4CE5459303F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16416068-5A10-4C67-8FDC-4CE5459303F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16416068-5A10-4C67-8FDC-4CE5459303F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
