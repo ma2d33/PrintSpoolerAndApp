@@ -30,7 +30,7 @@ namespace PrintSpoolerAndApp
 
             Console.WriteLine(prt.GetPrintJobStatus(selectedPrinter));
 
-            Console.WriteLine("Press any key to exit...");
+            Console.WriteLine("Press ENTER to exit...");
             Console.ReadLine();
         }
     }
