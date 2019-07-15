@@ -2,40 +2,35 @@
 using System.Linq;
 using System.Management;
 using System.Printing;
-
+using System.Text;
 
 namespace PrintSpoolerAndApp
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
             bool loopIt = true;
-            string printInfo = "";
+            StringBuilder printInfo = new StringBuilder();
             int jobId = 0;
 
-           string searchQuery = "SELECT * FROM Win32_PrintJob";
-           ManagementObjectSearcher searchPrintJobs = new ManagementObjectSearcher(searchQuery);
-           
-
-
-            while (loopIt == true)
+            string searchQuery = "SELECT * FROM Win32_PrintJob";
+            ManagementObjectSearcher searchPrintJobs = new ManagementObjectSearcher(searchQuery);
+                       
+            while (loopIt)
             {
                 ManagementObjectCollection printJobCollection = searchPrintJobs.Get();
-                foreach (ManagementObject manObj in printJobCollection)
+                foreach (ManagementObject manObj in printJobCollection.OfType<ManagementObject>())
                 {
-                    if (printJobCollection.Count != 0 && Convert.ToInt32(manObj.Properties["TotalPages"].Value) != 0 ) 
+                    if (printJobCollection.Count != 0 && Convert.ToInt32(manObj.Properties["TotalPages"].Value) != 0 && jobId != Convert.ToInt32(manObj.Properties["JobId"].Value))
                     {
-                        if (jobId != Convert.ToInt32(manObj.Properties["JobId"].Value))
-                        {
-                            printInfo += "\n" + "Printer: " + manObj.Properties["Name"].Value.ToString();
-                            printInfo += "\n" + "Document: " + manObj.Properties["Document"].Value.ToString();
-                            printInfo += "\n" + "Id: " + manObj.Properties["JobId"].Value.ToString();
-                            printInfo += "\n" + "TotalPages: " + manObj.Properties["TotalPages"].Value.ToString();
+                        printInfo.AppendLine("Printer: " + manObj.Properties["Name"].Value.ToString());
+                        printInfo.AppendLine("Document: " + manObj.Properties["Document"].Value.ToString());
+                        printInfo.AppendLine("Id: " + manObj.Properties["JobId"].Value.ToString());
+                        printInfo.AppendLine("TotalPages: " + manObj.Properties["TotalPages"].Value.ToString());
 
-                            Console.Write(printInfo);
-                            jobId = Convert.ToInt32(manObj.Properties["JobId"].Value);
-                        }
+                        Console.Write(printInfo.ToString());
+                        jobId = Convert.ToInt32(manObj.Properties["JobId"].Value);
                     }
                 }
 
