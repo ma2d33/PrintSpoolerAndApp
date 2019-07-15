@@ -12,7 +12,6 @@ namespace PrintSpoolerAndApp
         static void Main(string[] args)
         {
             bool loopIt = true;
-            StringBuilder printInfo = new StringBuilder();
             int jobId = 0;
 
             List<PrintObject> printers = new List<PrintObject>();
