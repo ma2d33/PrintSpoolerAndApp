@@ -3,6 +3,7 @@ using System.Linq;
 using System.Management;
 using System.Printing;
 using System.Text;
+using System.Collections.Generic;
 
 namespace PrintSpoolerAndApp
 {
@@ -14,12 +15,15 @@ namespace PrintSpoolerAndApp
             StringBuilder printInfo = new StringBuilder();
             int jobId = 0;
 
+            List < PtintObject > printers = new List<PrintObject>;
+
             string searchQuery = "SELECT * FROM Win32_PrintJob";
             ManagementObjectSearcher searchPrintJobs = new ManagementObjectSearcher(searchQuery);
-                       
+
             while (loopIt)
             {
                 ManagementObjectCollection printJobCollection = searchPrintJobs.Get();
+
                 foreach (ManagementObject manObj in printJobCollection.OfType<ManagementObject>())
                 {
                     if (printJobCollection.Count != 0 && Convert.ToInt32(manObj.Properties["TotalPages"].Value) != 0 && jobId != Convert.ToInt32(manObj.Properties["JobId"].Value))
@@ -31,6 +35,7 @@ namespace PrintSpoolerAndApp
 
                         Console.Write(printInfo.ToString());
                         jobId = Convert.ToInt32(manObj.Properties["JobId"].Value);
+
                     }
                 }
 
