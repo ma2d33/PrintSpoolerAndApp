@@ -15,7 +15,7 @@ namespace PrintSpoolerAndApp
             StringBuilder printInfo = new StringBuilder();
             int jobId = 0;
 
-            List < PtintObject > printers = new List<PrintObject>;
+            List < PrintObject > printers = new List<PrintObject>;
 
             string searchQuery = "SELECT * FROM Win32_PrintJob";
             ManagementObjectSearcher searchPrintJobs = new ManagementObjectSearcher(searchQuery);
