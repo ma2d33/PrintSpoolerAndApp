@@ -15,7 +15,7 @@ namespace PrintSpoolerAndApp
             StringBuilder printInfo = new StringBuilder();
             int jobId = 0;
 
-            List < PrintObject > printers = new List<PrintObject>;
+            List<PrintObject> printers = new List<PrintObject>();
 
             string searchQuery = "SELECT * FROM Win32_PrintJob";
             ManagementObjectSearcher searchPrintJobs = new ManagementObjectSearcher(searchQuery);
@@ -28,6 +28,15 @@ namespace PrintSpoolerAndApp
                 {
                     if (printJobCollection.Count != 0 && Convert.ToInt32(manObj.Properties["TotalPages"].Value) != 0 && jobId != Convert.ToInt32(manObj.Properties["JobId"].Value))
                     {
+                        if (printers.Any<PrintObject>(a => a.JobId == Convert.ToInt32(manObj.Properties["JobId"].Value))) //Any checks if object exists
+                        {
+
+                        }
+                        else
+                        {
+
+                        }
+
                         printInfo.AppendLine("Printer: " + manObj.Properties["Name"].Value.ToString());
                         printInfo.AppendLine("Document: " + manObj.Properties["Document"].Value.ToString());
                         printInfo.AppendLine("Id: " + manObj.Properties["JobId"].Value.ToString());

@@ -8,10 +8,10 @@ namespace PrintSpoolerAndApp
 {
    public class PrintObject
     {
-        string DocumentName = "";
-        string PrinterName = "";
-        int JobId = 0;
-        int TotalPages = 0;
+        public string DocumentName = "";
+        public string PrinterName = "";
+        public int JobId = 0;
+        public int TotalPages = 0;
 
     }
 }
