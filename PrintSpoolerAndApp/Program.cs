@@ -28,40 +28,33 @@ namespace PrintSpoolerAndApp
                 {
                     if (printJobCollection.Count != 0 && Convert.ToInt32(manObj.Properties["TotalPages"].Value) != 0 && jobId != Convert.ToInt32(manObj.Properties["JobId"].Value))
                     {
-                        if (printers.Any<PrintObject>(a => a.JobId == Convert.ToInt32(manObj.Properties["JobId"].Value))) //Any checks if object exists
+                        PrintObject updateInfo = new PrintObject
                         {
+                            JobId = Convert.ToInt32(manObj.Properties["JobId"].Value),
+                            PrinterName = manObj.Properties["Name"].Value.ToString(),
+                            DocumentName = manObj.Properties["Document"].Value.ToString(),
+                            TotalPages = Convert.ToInt32(manObj.Properties["TotalPages"].Value),
+                        };
 
-                             PrintObject updateInfo = new PrintObject
-                            {
-                                JobId = Convert.ToInt32(manObj.Properties["JobId"].Value),
-                                PrinterName = manObj.Properties["Name"].Value.ToString(),
-                                DocumentName = manObj.Properties["Document"].Value.ToString(),
-                                TotalPages = Convert.ToInt32(manObj.Properties["TotalPages"].Value),
-                            };
-
-
-                            printers.Insert(printers.FindIndex(a => a.JobId.Equals(Convert.ToInt32(manObj.Properties["JobId"].Value))), updateInfo);
+                        if (printers.Any<PrintObject>(a => a.JobId == updateInfo.JobId))
+                        {
+                            printers.Insert(printers.FindIndex(a => a.JobId.Equals(updateInfo.JobId)), updateInfo);
                         }
                         else
                         {
-
-                            PrintObject updateInfo = new PrintObject
-                            {
-                                JobId = Convert.ToInt32(manObj.Properties["JobId"].Value),
-                                PrinterName = manObj.Properties["Name"].Value.ToString(),
-                                DocumentName = manObj.Properties["Document"].Value.ToString(),
-                                TotalPages = Convert.ToInt32(manObj.Properties["TotalPages"].Value),
-                            };
-
-                           printers.Add(updateInfo);
-                           Console.WriteLine(updateInfo.GetInfoString());
-
+                            printers.Add(updateInfo);
                         }
 
-                           
-
+                        Console.WriteLine(updateInfo.GetInfoString());
                     }
                 }
+
+                /*
+                foreach (PrintObject printer in printers)
+                {
+                    Console.WriteLine(printer.GetInfoString());
+                }
+                */
 
                 //looking for jobs here , THEY TOOK OUR JAAAABS!!!
             }
