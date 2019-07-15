@@ -30,16 +30,18 @@ namespace PrintSpoolerAndApp
                     {
                         if (printers.Any<PrintObject>(a => a.JobId == Convert.ToInt32(manObj.Properties["JobId"].Value))) //Any checks if object exists
                         {
-                           
+
                         }
                         else
                         {
 
-                            PrintObject updateInfo = new PrintObject();
-                            updateInfo.JobId = Convert.ToInt32(manObj.Properties["JobId"].Value);
-                            updateInfo.PrinterName = manObj.Properties["Name"].Value.ToString();
-                            updateInfo.DocumentName = manObj.Properties["Document"].Value.ToString();
-                            updateInfo.TotalPages = Convert.ToInt32(manObj.Properties["TotalPages"].Value);
+                            PrintObject updateInfo = new PrintObject
+                            {
+                                JobId = Convert.ToInt32(manObj.Properties["JobId"].Value),
+                                PrinterName = manObj.Properties["Name"].Value.ToString(),
+                                DocumentName = manObj.Properties["Document"].Value.ToString(),
+                                TotalPages = Convert.ToInt32(manObj.Properties["TotalPages"].Value),
+                            };
 
                             printers.Add(updateInfo);
                            Console.WriteLine(updateInfo.GetInfoString());
