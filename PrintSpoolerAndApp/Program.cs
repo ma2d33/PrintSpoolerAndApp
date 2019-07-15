@@ -43,7 +43,7 @@ namespace PrintSpoolerAndApp
                                 TotalPages = Convert.ToInt32(manObj.Properties["TotalPages"].Value),
                             };
 
-                            printers.Add(updateInfo);
+                           printers.Add(updateInfo);
                            Console.WriteLine(updateInfo.GetInfoString());
 
                         }
