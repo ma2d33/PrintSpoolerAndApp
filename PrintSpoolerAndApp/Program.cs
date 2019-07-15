@@ -42,9 +42,11 @@ namespace PrintSpoolerAndApp
                         else
                         {
                             printers.Add(updateInfo);
+                            
                         }
-
+                        Console.Clear();
                         Console.WriteLine(updateInfo.GetInfoString());
+
                     }
                 }
 
