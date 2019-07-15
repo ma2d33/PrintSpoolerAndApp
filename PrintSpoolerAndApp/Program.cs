@@ -1,9 +1,8 @@
-﻿using PrinterLib;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Management;
+using System.Printing;
+
 
 namespace PrintSpoolerAndApp
 {
@@ -11,27 +10,38 @@ namespace PrintSpoolerAndApp
     {
         static void Main(string[] args)
         {
-            Console.Clear();
+            bool loopIt = true;
+            string printInfo = "";
+            int jobId = 0;
 
-            Printer prt = new Printer();
-            List<string> printers = prt.GetPrintersList();
-            short Index = 0;
+           string searchQuery = "SELECT * FROM Win32_PrintJob";
+           ManagementObjectSearcher searchPrintJobs = new ManagementObjectSearcher(searchQuery);
+           
 
-            foreach (string printer in printers)
+
+            while (loopIt == true)
             {
-                Console.WriteLine(Index.ToString() + " = " + printer);
-                Index++;
+                ManagementObjectCollection printJobCollection = searchPrintJobs.Get();
+                foreach (ManagementObject manObj in printJobCollection)
+                {
+                    if (printJobCollection.Count != 0 && Convert.ToInt32(manObj.Properties["TotalPages"].Value) != 0 ) 
+                    {
+                        if (jobId != Convert.ToInt32(manObj.Properties["JobId"].Value))
+                        {
+                            printInfo += "\n" + "Printer: " + manObj.Properties["Name"].Value.ToString();
+                            printInfo += "\n" + "Document: " + manObj.Properties["Document"].Value.ToString();
+                            printInfo += "\n" + "Id: " + manObj.Properties["JobId"].Value.ToString();
+                            printInfo += "\n" + "TotalPages: " + manObj.Properties["TotalPages"].Value.ToString();
+
+                            Console.Write(printInfo);
+                            jobId = Convert.ToInt32(manObj.Properties["JobId"].Value);
+                        }
+                    }
+                }
+
+                //looking for jobs here , THEY TOOK OUR JAAAABS!!!
             }
 
-            Console.WriteLine(Environment.NewLine);
-            Console.WriteLine("Enter Printer Index:");
-            short printerIndex = Convert.ToInt16(Console.ReadLine());
-            string selectedPrinter = printers[printerIndex];
-
-            Console.WriteLine(prt.GetPrintJobStatus(selectedPrinter));
-
-            Console.WriteLine("Press ENTER to exit...");
-            Console.ReadLine();
         }
     }
 }
