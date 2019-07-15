@@ -13,5 +13,17 @@ namespace PrintSpoolerAndApp
         public int JobId = 0;
         public int TotalPages = 0;
 
+        public string GetInfoString()
+        {
+            StringBuilder printInfo = new StringBuilder();
+
+            printInfo.AppendLine("Printer: " + this.PrinterName);
+            printInfo.AppendLine("Document: " + this.DocumentName);
+            printInfo.AppendLine("Id: " + this.JobId);
+            printInfo.AppendLine("TotalPages: " + this.TotalPages);
+
+            return printInfo.ToString();
+        }
+
     }
 }
