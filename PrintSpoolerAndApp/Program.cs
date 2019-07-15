@@ -31,6 +31,16 @@ namespace PrintSpoolerAndApp
                         if (printers.Any<PrintObject>(a => a.JobId == Convert.ToInt32(manObj.Properties["JobId"].Value))) //Any checks if object exists
                         {
 
+                             PrintObject updateInfo = new PrintObject
+                            {
+                                JobId = Convert.ToInt32(manObj.Properties["JobId"].Value),
+                                PrinterName = manObj.Properties["Name"].Value.ToString(),
+                                DocumentName = manObj.Properties["Document"].Value.ToString(),
+                                TotalPages = Convert.ToInt32(manObj.Properties["TotalPages"].Value),
+                            };
+
+
+                            printers.Insert(printers.FindIndex(a => a.JobId.Equals(Convert.ToInt32(manObj.Properties["JobId"].Value))), updateInfo);
                         }
                         else
                         {
@@ -48,13 +58,7 @@ namespace PrintSpoolerAndApp
 
                         }
 
-                       /* printInfo.AppendLine("Printer: " + manObj.Properties["Name"].Value.ToString());
-                        printInfo.AppendLine("Document: " + manObj.Properties["Document"].Value.ToString());
-                        printInfo.AppendLine("Id: " + manObj.Properties["JobId"].Value.ToString());
-                        printInfo.AppendLine("TotalPages: " + manObj.Properties["TotalPages"].Value.ToString());
-
-                        Console.Write(printInfo.ToString());
-                        jobId = Convert.ToInt32(manObj.Properties["JobId"].Value);*/
+                           
 
                     }
                 }
